@@ -1,0 +1,85 @@
+services:
+  brave1:
+    image: lscr.io/linuxserver/brave:latest
+    container_name: brave1
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - CUSTOM_USER=user1
+      - PASSWORD=admin
+    volumes:
+      - ./brave/user1:/config
+    ports:
+      - "127.0.0.1:1001:3001"
+    shm_size: "1gb"
+    mem_limit: 1400m
+    restart: unless-stopped
+
+  brave2:
+    image: lscr.io/linuxserver/brave:latest
+    container_name: brave2
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - CUSTOM_USER=user2
+      - PASSWORD=admin
+    volumes:
+      - ./brave/user2:/config
+    ports:
+      - "127.0.0.1:1002:3001"
+    shm_size: "1gb"
+    mem_limit: 1400m
+    restart: unless-stopped
+
+  brave3:
+    image: lscr.io/linuxserver/brave:latest
+    container_name: brave3
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - CUSTOM_USER=user3
+      - PASSWORD=admin
+    volumes:
+      - ./brave/user3:/config
+    ports:
+      - "127.0.0.1:1003:3001"
+    shm_size: "1gb"
+    mem_limit: 1400m
+    restart: unless-stopped
+
+  brave4:
+    image: lscr.io/linuxserver/brave:latest
+    container_name: brave4
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - CUSTOM_USER=user4
+      - PASSWORD=admin
+    volumes:
+      - ./brave/user4:/config
+    ports:
+      - "127.0.0.1:1004:3001"
+    shm_size: "1gb"
+    mem_limit: 1400m
+    restart: unless-stopped
+
+  spotify:
+    image: lscr.io/linuxserver/spotube:latest
+    container_name: spotify
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - CUSTOM_USER=spotify
+      - PASSWORD=SPOTIFY
+    volumes:
+      - ./spotify:/config
+    ports:
+      - "127.0.0.1:1010:3001"
+    shm_size: "512mb"
+    mem_limit: 800m
+    restart: unless-stopped
