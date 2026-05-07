@@ -11,7 +11,7 @@ services:
     volumes:
       - ./brave/user1:/config
     ports:
-      - "127.0.0.1:1001:3001"
+      - "127.0.0.1:1001:3000"
     shm_size: "1gb"
     mem_limit: 1400m
     restart: unless-stopped
@@ -28,7 +28,7 @@ services:
     volumes:
       - ./brave/user2:/config
     ports:
-      - "127.0.0.1:1002:3001"
+      - "127.0.0.1:1002:3000"
     shm_size: "1gb"
     mem_limit: 1400m
     restart: unless-stopped
@@ -45,7 +45,7 @@ services:
     volumes:
       - ./brave/user3:/config
     ports:
-      - "127.0.0.1:1003:3001"
+      - "127.0.0.1:1003:3000"
     shm_size: "1gb"
     mem_limit: 1400m
     restart: unless-stopped
@@ -62,14 +62,14 @@ services:
     volumes:
       - ./brave/user4:/config
     ports:
-      - "127.0.0.1:1004:3001"
+      - "127.0.0.1:1004:3000"
     shm_size: "1gb"
     mem_limit: 1400m
     restart: unless-stopped
 
   spotify:
-    image: lscr.io/linuxserver/spotube:latest
-    container_name: spotify
+    image: lscr.io/linuxserver/brave:latest
+    container_name: spotify-browser
     environment:
       - PUID=1000
       - PGID=1000
@@ -79,7 +79,20 @@ services:
     volumes:
       - ./spotify:/config
     ports:
-      - "127.0.0.1:1010:3001"
-    shm_size: "512mb"
-    mem_limit: 800m
+      - "127.0.0.1:1010:3000"
+    shm_size: "1gb"
+    mem_limit: 1200m
+    restart: unless-stopped
+
+  dashboard:
+    image: node:20-alpine
+    container_name: bru-dashboard
+    working_dir: /app
+    command: sh -c "npm init -y >/dev/null 2>&1 && npm install express >/dev/null 2>&1 && node server.js"
+    volumes:
+      - ./server.js:/app/server.js:ro
+      - ./public:/app/public:ro
+      - ./data:/app/data
+    ports:
+      - "127.0.0.1:1000:3000"
     restart: unless-stopped
