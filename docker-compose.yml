@@ -23,7 +23,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
-      - CUSTOM_USER=user2
+      - CUSTOM_USER=user1
       - PASSWORD=admin
     volumes:
       - ./brave/user2:/config
@@ -40,7 +40,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
-      - CUSTOM_USER=user3
+      - CUSTOM_USER=user1
       - PASSWORD=admin
     volumes:
       - ./brave/user3:/config
@@ -57,7 +57,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
-      - CUSTOM_USER=user4
+      - CUSTOM_USER=user1
       - PASSWORD=admin
     volumes:
       - ./brave/user4:/config
@@ -74,8 +74,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
-      - CUSTOM_USER=spotify
-      - PASSWORD=SPOTIFY
+      - CUSTOM_USER=user1
+      - PASSWORD=admin
     volumes:
       - ./spotify:/config
     ports:
