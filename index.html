@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky0Cloud Browsers</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0d1117;
+    color: white;
+}
+
+header {
+    padding: 30px;
+    text-align: center;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+.subtitle {
+    color: #8b949e;
+    margin-top: 8px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 20px;
+    padding: 25px;
+}
+
+.card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 18px;
+    padding: 20px;
+    transition: 0.2s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.35);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+}
+
+.status {
+    margin: 14px 0;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.online {
+    color: #3fb950;
+}
+
+.offline {
+    color: #f85149;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: #238636;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: #2ea043;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #8b949e;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Sky0Cloud Browser Hub</h1>
+    <div class="subtitle">
+        Private Cloud Browsers
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Brave 1</h2>
+        <div class="status" id="status1">Checking...</div>
+        <button onclick="openSite('https://bru1.sky0cloud.dpdns.org')">
+            Open Browser
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>Brave 2</h2>
+        <div class="status" id="status2">Checking...</div>
+        <button onclick="openSite('https://bru2.sky0cloud.dpdns.org')">
+            Open Browser
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>Brave 3</h2>
+        <div class="status" id="status3">Checking...</div>
+        <button onclick="openSite('https://bru3.sky0cloud.dpdns.org')">
+            Open Browser
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>Brave 4</h2>
+        <div class="status" id="status4">Checking...</div>
+        <button onclick="openSite('https://bru4.sky0cloud.dpdns.org')">
+            Open Browser
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>Spotify Shared</h2>
+        <div class="status" id="status5">Checking...</div>
+        <button onclick="openSite('https://bru5.sky0cloud.dpdns.org')">
+            Open Spotify
+        </button>
+    </div>
+
+</div>
+
+<footer>
+    Sky0Cloud • Docker Browser System
+</footer>
+
+<script>
+
+const services = [
+    {
+        id: "status1",
+        url: "https://bru1.sky0cloud.dpdns.org"
+    },
+    {
+        id: "status2",
+        url: "https://bru2.sky0cloud.dpdns.org"
+    },
+    {
+        id: "status3",
+        url: "https://bru3.sky0cloud.dpdns.org"
+    },
+    {
+        id: "status4",
+        url: "https://bru4.sky0cloud.dpdns.org"
+    },
+    {
+        id: "status5",
+        url: "https://bru5.sky0cloud.dpdns.org"
+    }
+];
+
+async function checkService(service) {
+
+    const el = document.getElementById(service.id);
+
+    try {
+
+        await fetch(service.url, {
+            method: 'HEAD',
+            mode: 'no-cors'
+        });
+
+        el.innerHTML = "ONLINE";
+        el.className = "status online";
+
+    } catch (err) {
+
+        el.innerHTML = "OFFLINE";
+        el.className = "status offline";
+    }
+}
+
+function openSite(url) {
+    window.location.href = url;
+}
+
+async function refreshStatuses() {
+
+    for (const service of services) {
+        checkService(service);
+    }
+}
+
+refreshStatuses();
+
+setInterval(refreshStatuses, 15000);
+
+</script>
+
+</body>
+</html>
