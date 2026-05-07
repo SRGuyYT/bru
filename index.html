@@ -1,216 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sky0Cloud Browsers</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sky0Cloud Browser Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1f2937, #020617);
+      color: white;
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0d1117;
-    color: white;
-}
+    header {
+      text-align: center;
+      padding: 32px 16px;
+    }
 
-header {
-    padding: 30px;
-    text-align: center;
-    background: #161b22;
-    border-bottom: 1px solid #30363d;
-}
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
 
-h1 {
-    margin: 0;
-    font-size: 2.2rem;
-}
+    p {
+      color: #94a3b8;
+    }
 
-.subtitle {
-    color: #8b949e;
-    margin-top: 8px;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
 
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 20px;
-    padding: 25px;
-}
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.35);
+    }
 
-.card {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 18px;
-    padding: 20px;
-    transition: 0.2s ease;
-    box-shadow: 0 0 20px rgba(0,0,0,0.35);
-}
+    .shared {
+      border-color: #22c55e;
+    }
 
-.card:hover {
-    transform: translateY(-5px);
-}
+    .title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
 
-.card h2 {
-    margin-top: 0;
-    font-size: 1.4rem;
-}
+    .status {
+      margin: 12px 0;
+      font-weight: 700;
+    }
 
-.status {
-    margin: 14px 0;
-    font-weight: bold;
-    font-size: 1rem;
-}
+    .free { color: #22c55e; }
+    .busy { color: #f59e0b; }
+    .shared-text { color: #38bdf8; }
 
-.online {
-    color: #3fb950;
-}
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #334155;
+      background: #020617;
+      color: white;
+      margin: 8px 0;
+      font-size: 1rem;
+    }
 
-.offline {
-    color: #f85149;
-}
+    button, a.button {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1rem;
+      color: white;
+      background: #2563eb;
+      cursor: pointer;
+    }
 
-button {
-    width: 100%;
-    padding: 13px;
-    border: none;
-    border-radius: 12px;
-    background: #238636;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
+    button.release {
+      background: #dc2626;
+    }
 
-button:hover {
-    background: #2ea043;
-}
+    a.spotify {
+      background: #16a34a;
+    }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    color: #8b949e;
-}
-</style>
+    footer {
+      text-align: center;
+      color: #64748b;
+      padding: 24px;
+    }
+  </style>
 </head>
 <body>
-
-<header>
+  <header>
     <h1>Sky0Cloud Browser Hub</h1>
-    <div class="subtitle">
-        Private Cloud Browsers
-    </div>
-</header>
+    <p>Claim a browser before using it. Spotify is shared.</p>
+  </header>
 
-<div class="container">
+  <main class="grid" id="grid"></main>
 
-    <div class="card">
-        <h2>Brave 1</h2>
-        <div class="status" id="status1">Checking...</div>
-        <button onclick="openSite('https://bru1.sky0cloud.dpdns.org')">
-            Open Browser
-        </button>
-    </div>
+  <footer>
+    bru.sky0cloud.dpdns.org
+  </footer>
 
-    <div class="card">
-        <h2>Brave 2</h2>
-        <div class="status" id="status2">Checking...</div>
-        <button onclick="openSite('https://bru2.sky0cloud.dpdns.org')">
-            Open Browser
-        </button>
-    </div>
+  <script>
+    const browsers = [
+      { id: "brave1", name: "Brave 1", url: "https://bru1.sky0cloud.dpdns.org" },
+      { id: "brave2", name: "Brave 2", url: "https://bru2.sky0cloud.dpdns.org" },
+      { id: "brave3", name: "Brave 3", url: "https://bru3.sky0cloud.dpdns.org" },
+      { id: "brave4", name: "Brave 4", url: "https://bru4.sky0cloud.dpdns.org" }
+    ];
 
-    <div class="card">
-        <h2>Brave 3</h2>
-        <div class="status" id="status3">Checking...</div>
-        <button onclick="openSite('https://bru3.sky0cloud.dpdns.org')">
-            Open Browser
-        </button>
-    </div>
+    async function getStatus() {
+      const res = await fetch("/api/status");
+      return await res.json();
+    }
 
-    <div class="card">
-        <h2>Brave 4</h2>
-        <div class="status" id="status4">Checking...</div>
-        <button onclick="openSite('https://bru4.sky0cloud.dpdns.org')">
-            Open Browser
-        </button>
-    </div>
+    async function claim(id) {
+      const name = document.getElementById(`${id}-name`).value || "Someone";
+      await fetch(`/api/claim/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name })
+      });
+      render();
+    }
 
-    <div class="card">
-        <h2>Spotify Shared</h2>
-        <div class="status" id="status5">Checking...</div>
-        <button onclick="openSite('https://bru5.sky0cloud.dpdns.org')">
+    async function release(id) {
+      await fetch(`/api/release/${id}`, { method: "POST" });
+      render();
+    }
+
+    function sinceText(iso) {
+      if (!iso) return "";
+      const mins = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
+      if (mins < 1) return "just now";
+      if (mins === 1) return "1 minute ago";
+      return `${mins} minutes ago`;
+    }
+
+    async function render() {
+      const status = await getStatus();
+      const grid = document.getElementById("grid");
+
+      grid.innerHTML = browsers.map(b => {
+        const used = status[b.id];
+
+        return `
+          <section class="card">
+            <div class="title">${b.name}</div>
+            <div class="status ${used ? "busy" : "free"}">
+              ${used ? `IN USE by ${used.name} • ${sinceText(used.since)}` : "AVAILABLE"}
+            </div>
+
+            <input id="${b.id}-name" placeholder="Your name" />
+
+            <button onclick="claim('${b.id}')">
+              Claim
+            </button>
+
+            <a class="button" href="${b.url}">
+              Open Browser
+            </a>
+
+            <button class="release" onclick="release('${b.id}')">
+              Release
+            </button>
+          </section>
+        `;
+      }).join("");
+
+      grid.innerHTML += `
+        <section class="card shared">
+          <div class="title">Spotify Shared</div>
+          <div class="status shared-text">SHARED SERVICE</div>
+          <p>Anyone can use this. It is not claimed.</p>
+          <a class="button spotify" href="https://bru5.sky0cloud.dpdns.org">
             Open Spotify
-        </button>
-    </div>
-
-</div>
-
-<footer>
-    Sky0Cloud • Docker Browser System
-</footer>
-
-<script>
-
-const services = [
-    {
-        id: "status1",
-        url: "https://bru1.sky0cloud.dpdns.org"
-    },
-    {
-        id: "status2",
-        url: "https://bru2.sky0cloud.dpdns.org"
-    },
-    {
-        id: "status3",
-        url: "https://bru3.sky0cloud.dpdns.org"
-    },
-    {
-        id: "status4",
-        url: "https://bru4.sky0cloud.dpdns.org"
-    },
-    {
-        id: "status5",
-        url: "https://bru5.sky0cloud.dpdns.org"
+          </a>
+        </section>
+      `;
     }
-];
 
-async function checkService(service) {
-
-    const el = document.getElementById(service.id);
-
-    try {
-
-        await fetch(service.url, {
-            method: 'HEAD',
-            mode: 'no-cors'
-        });
-
-        el.innerHTML = "ONLINE";
-        el.className = "status online";
-
-    } catch (err) {
-
-        el.innerHTML = "OFFLINE";
-        el.className = "status offline";
-    }
-}
-
-function openSite(url) {
-    window.location.href = url;
-}
-
-async function refreshStatuses() {
-
-    for (const service of services) {
-        checkService(service);
-    }
-}
-
-refreshStatuses();
-
-setInterval(refreshStatuses, 15000);
-
-</script>
-
+    render();
+    setInterval(render, 10000);
+  </script>
 </body>
 </html>
